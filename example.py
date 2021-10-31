@@ -81,6 +81,6 @@ if __name__ == "__main__":
         except (KeyboardInterrupt, SystemExit):
             clean_and_exit()
         except Exception as ex:
-            print("Something went wrong! Exception will be rised after GPIO.cleanup()")
+            print("Something went wrong! Exception will be raised after GPIO.cleanup()")
             clean()
             raise ex
