@@ -42,8 +42,8 @@ class HX711:
         # Think about whether this is necessary.
         time.sleep(1)
 
-    def convert_from_twos_complement_24_bit(self, inputValue):
-        return -(inputValue & 0x800000) + (inputValue & 0x7fffff)
+    def convert_from_twos_complement_24_bit(self, input_value):
+        return -(input_value & 0x800000) + (input_value & 0x7fffff)
 
     def is_ready(self):
         return GPIO.input(self.dout) == 0
@@ -220,10 +220,10 @@ class HX711:
 
     def get_value_b(self, times=3):
         # for channel B, we need to set_gain(32)
-        g = self.get_gain()
+        old_gain = self.get_gain()
         self.set_gain(32)
         value = self.read_median(times) - self.get_offset_b()
-        self.set_gain(g)
+        self.set_gain(old_gain)
         return value
 
     # Compatibility function, uses channel A version

@@ -24,7 +24,7 @@ class HX711:
         self.read_lock = threading.Lock()
 
         self.gain = 0
-        # The value returned by the hx711 that corresponds to your reference unit 
+        # The value returned by the hx711 that corresponds to your reference unit
         # AFTER dividing by the SCALE.
         self.reference_unit = 1
 
@@ -59,8 +59,8 @@ class HX711:
 
             return 0x800000 + diff
 
-    def convert_from_twos_complement_24_bit(self, inputValue):
-        return -(inputValue & 0x800000) + (inputValue & 0x7fffff)
+    def convert_from_twos_complement_24_bit(self, input_value):
+        return -(input_value & 0x800000) + (input_value & 0x7fffff)
 
     def is_ready(self):
         # Calculate how long we should be waiting between samples, given the
@@ -103,13 +103,13 @@ class HX711:
             self.last_read_time = time.time()
 
             # Generate a 24bit 2s complement sample for the virtual HX711.
-            rawSample = self.convert_to_twos_complement_24_bit(
+            raw_sample = self.convert_to_twos_complement_24_bit(
                 self.generate_fake_sample())
 
             # Read three bytes of data from the HX711.
-            first_byte = (rawSample >> 16) & 0xFF
-            second_byte = (rawSample >> 8) & 0xFF
-            third_byte = rawSample & 0xFF
+            first_byte = (raw_sample >> 16) & 0xFF
+            second_byte = (raw_sample >> 8) & 0xFF
+            third_byte = raw_sample & 0xFF
 
         # Depending on how we're configured, return an orderd list of raw byte
         # values.
